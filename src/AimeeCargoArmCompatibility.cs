@@ -75,13 +75,6 @@ internal static class AimeeCargoArmCompatibility
             return false;
         }
 
-        ILogicable currentTarget = (ILogicable)TargetLogicableField.GetValue(cargoArm);
-        if (!ReferenceEquals(currentTarget, robot))
-        {
-            LarrePlusMod.Log(
-                $"Cargo arm {cargoArm.ReferenceId} targeted AIMeE {robot.ReferenceId}.");
-        }
-
         // Vanilla refreshes this target every server tick. Keep that behaviour so
         // clients joining after acquisition receive the target reference as well.
         SetTargetLogicableMethod.Invoke(cargoArm, new object[] { robot });
