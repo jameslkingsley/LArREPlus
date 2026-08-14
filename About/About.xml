@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ModMetadata xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Name>Larre Plus</Name>
+  <ModID>com.james.larreplus</ModID>
+  <Author>James</Author>
+  <Version>0.2.2</Version>
+  <Description>
+    This is a Plugin Mod.
+    It requires BepInEx with the StationeersLaunchPad plugin.
+    See: https://github.com/StationeersLaunchPad/StationeersLaunchPad
+    Source code and issue tracker: [url=https://github.com/jameslkingsley/LArREPlus]GitHub - Larre Plus[/url]
+
+    [h1]Larre Plus[/h1]
+    [i]More capable LArRE automation.[/i]
+
+    Larre Plus expands the game's robotic arms with AIMeE inventory access, Cargo Large Arm stack merging, configurable movement speed, and unrestricted movement beside obstructions.
+
+    [hr]
+
+    [h1]Features[/h1]
+
+    [list]
+    [*][b]AIMeE access:[/b] Cargo Large Arms can insert into, extract from, and swap items with an AIMeE parked beneath the arm
+    [*][b]Hidden cargo slots:[/b] automation can use AIMeE slots that are hidden from the normal contents panel
+    [*][b]Safe slot selection:[/b] unsupported and out-of-range AIMeE indices are denied without exceptions
+    [*][b]Stack merging:[/b] matching items in the target slot merge into the Cargo Arm's held stack instead of swapping; overflow remains in the target slot
+    [*][b]Configurable speed:[/b] multiply rail, bypass, extension, retraction, and Cargo Arm cycle speed from 0.1x to 10x
+    [*][b]Unrestricted movement:[/b] rail collision and extension-face obstruction limits are removed from every LArRE arm
+    [*][b]Multiplayer support:[/b] inventory operations remain server-authoritative and the server's speed setting is synchronized to clients
+    [/list]
+
+    [hr]
+
+    [h1]Using AIMeE with a Cargo Large Arm[/h1]
+
+    Leave the arm's ordinary target position free and park AIMeE beneath it. Select an AIMeE inventory slot using the arm's slot-index control or logic, then activate the arm normally.
+
+    An empty arm extracts from the selected slot. An occupied arm inserts, swaps, or merges matching stacks. Ordinary stationary targets retain priority, and the transfer is cancelled if AIMeE moves out of reach while the arm is operating.
+
+    [hr]
+
+    [h1]Movement speed configuration[/h1]
+
+    Open StationeersLaunchPad's pre-launch [b]Mod Configuration[/b] screen and change [b]LArRE Arms / MovementSpeedMultiplier[/b]. The accepted range is 0.1 to 10 and the default is 1. Restart the game or server after changing it.
+
+    On multiplayer worlds the dedicated or listen server's value is authoritative. The server and every connecting client must install the same Larre Plus version because the mod extends LArRE join data to synchronize the setting.
+  </Description>
+  <ChangeLog>
+    [h3]Version 0.2.2[/h3]
+    [list]
+    [*]Fixed LaunchPad-configured movement speed values reverting to the default at runtime
+    [/list]
+
+    [h3]Version 0.2.1[/h3]
+    [list]
+    [*]Exposed MovementSpeedMultiplier in LaunchPad's pre-launch Mod Configuration screen
+    [/list]
+
+    [h3]Version 0.2.0[/h3]
+    [list]
+    [*]Added matching-stack merging for Cargo Large Arms
+    [*]Added a server-synchronized movement speed multiplier for every LArRE arm
+    [*]Removed rail and extension obstruction limits from every LArRE arm
+    [/list]
+
+    [h3]Version 0.1.1[/h3]
+    [list]
+    [*]Safely handles Cargo Large Arm target indices beyond AIMeE's slot count
+    [/list]
+
+    [h3]Version 0.1.0[/h3]
+    [list]
+    [*]Cargo Large Arm targeting and inventory operations for AIMeE
+    [*]Server-authoritative insertion, extraction, and swapping
+    [*]Access to AIMeE hidden cargo slots
+    [/list]
+  </ChangeLog>
+  <IsBetaProgramMod>false</IsBetaProgramMod>
+  <Tags>
+    <Tag>StationeersLaunchPad</Tag>
+  </Tags>
+  <InGameDescription><![CDATA[<size="30"><color=#ffa500>Larre Plus</color></size>
+
+This is a Plugin Mod requiring BepInEx and StationeersLaunchPad.
+Source code: https://github.com/jameslkingsley/LArREPlus
+
+Adds AIMeE inventory access and matching-stack merging to Cargo Large Arms. Every LArRE arm also gains unrestricted movement and a configurable 0.1x-to-10x speed multiplier.
+
+Configure speed before launch under Mod Configuration > Larre Plus > LArRE Arms > MovementSpeedMultiplier.
+
+On multiplayer worlds the server's setting is authoritative. The server and every client must install the same Larre Plus version.]]></InGameDescription>
+</ModMetadata>

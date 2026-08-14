@@ -1,0 +1,44 @@
+# Changelog
+
+All notable changes to Larre Plus are documented here.
+
+The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
+and this project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## Unreleased
+
+## 0.2.2 - 2026-08-14
+
+### Fixed
+
+- Reloaded LaunchPad's saved configuration before applying the movement-speed
+  multiplier, so pre-launch selections take effect at runtime.
+
+## 0.2.1 - 2026-08-14
+
+### Changed
+
+- Exposed `MovementSpeedMultiplier` in LaunchPad's pre-launch Mod Configuration
+  screen.
+
+## 0.2.0 - 2026-08-14
+
+### Added
+
+- Matching-stack merging for Cargo Large Arms.
+- A server-authoritative movement-speed multiplier for every LArRE arm.
+- Unrestricted rail movement and extension beside obstructions for every LArRE
+  arm.
+
+## 0.1.1 - 2026-08-14
+
+### Fixed
+
+- Safely handled Cargo Large Arm target indices beyond AIMeE's slot count.
+
+## 0.1.0 - 2026-08-14
+
+### Added
+
+- Cargo Large Arm access to AIMeE inventory slots.
+- Server-authoritative AIMeE insertion, extraction, and swapping.
