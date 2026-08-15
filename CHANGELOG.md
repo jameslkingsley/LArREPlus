@@ -1,6 +1,6 @@
 # Changelog
 
-All notable changes to Larre Plus are documented here.
+All notable changes to LArRE+ are documented here.
 
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
@@ -13,6 +13,11 @@ and this project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html)
 
 - Whole-AIMeE pickup now overrides the robot's actual draggable-object slot
   eligibility check, allowing it to enter the Cargo Large Arm hand.
+
+### Changed
+
+- Renamed the public-facing mod from Larre Plus to LArRE+ and refreshed its
+  Workshop, LaunchPad, and in-game descriptions.
 
 ## 0.3.0 - 2026-08-15
 

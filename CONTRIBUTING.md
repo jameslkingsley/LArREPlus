@@ -28,6 +28,6 @@ Stationeers and dependency assemblies must not be committed.
 
 ## Bug reports
 
-Include the Stationeers build, Larre Plus version, BepInEx and LaunchPad
+Include the Stationeers build, LArRE+ version, BepInEx and LaunchPad
 versions, multiplayer environment, reproduction steps, and the smallest useful
 `[LarrePlus]` log excerpt.

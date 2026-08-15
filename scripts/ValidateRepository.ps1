@@ -32,12 +32,16 @@ $source = Get-Content -LiteralPath (Join-Path $projectRoot 'src/LarrePlusMod.cs'
 $aimeeSource = Get-Content -LiteralPath (Join-Path $projectRoot 'src/AimeeCargoArmCompatibility.cs') -Raw -Encoding UTF8
 
 $expectedId = 'com.james.larreplus'
+$expectedName = 'LArRE+'
 $expectedAssembly = 'LarrePlus'
 $expectedRepository = 'https://github.com/jameslkingsley/LArREPlus'
 $version = [string]$project.Project.PropertyGroup.Version
 
 if ([string]$about.ModMetadata.ModID -ne $expectedId) {
     throw "About.xml ModID does not equal $expectedId."
+}
+if ([string]$about.ModMetadata.Name -ne $expectedName) {
+    throw "About.xml Name does not equal $expectedName."
 }
 if ([string]$project.Project.PropertyGroup.AssemblyName -ne $expectedAssembly) {
     throw "AssemblyName does not equal $expectedAssembly."
@@ -53,6 +57,9 @@ if ($about.OuterXml -notmatch [regex]::Escape($expectedRepository)) {
 }
 if ($source -notmatch [regex]::Escape("public const string ModId = `"$expectedId`";")) {
     throw 'LarrePlusMod.ModId does not match About.xml.'
+}
+if ($source -notmatch [regex]::Escape("public const string DisplayName = `"$expectedName`";")) {
+    throw 'LarrePlusMod.DisplayName does not match About.xml.'
 }
 if ($source -notmatch [regex]::Escape("public const string Version = `"$version`";")) {
     throw 'LarrePlusMod.Version does not match the project version.'

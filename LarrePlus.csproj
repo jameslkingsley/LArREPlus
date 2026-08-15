@@ -5,7 +5,7 @@
     <RootNamespace>LarrePlus</RootNamespace>
     <Version>0.3.1</Version>
     <Authors>James</Authors>
-    <Description>Expanded AIMeE access, stacking, speed, and movement for Stationeers LArRE arms.</Description>
+    <Description>Whole-AIMeE transport, smarter cargo handling, configurable speed, and unrestricted movement for Stationeers LArRE arms.</Description>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <RepositoryUrl>https://github.com/jameslkingsley/LArREPlus</RepositoryUrl>
     <RepositoryType>git</RepositoryType>

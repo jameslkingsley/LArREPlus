@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ModMetadata xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <Name>Larre Plus</Name>
+  <Name>LArRE+</Name>
   <ModID>com.james.larreplus</ModID>
   <Author>James</Author>
   <Version>0.3.1</Version>
@@ -8,12 +8,14 @@
     This is a Plugin Mod.
     It requires BepInEx with the StationeersLaunchPad plugin.
     See: https://github.com/StationeersLaunchPad/StationeersLaunchPad
-    Source code and issue tracker: [url=https://github.com/jameslkingsley/LArREPlus]GitHub - Larre Plus[/url]
+    Source code and issue tracker: [url=https://github.com/jameslkingsley/LArREPlus]GitHub - LArRE+[/url]
 
-    [h1]Larre Plus[/h1]
+    [h1]LArRE+[/h1]
     [i]More capable LArRE automation.[/i]
 
-    Larre Plus expands the game's robotic arms with whole-AIMeE transport, AIMeE inventory access, Cargo Large Arm stack merging, configurable movement speed, and unrestricted movement beside obstructions.
+    LArRE+ expands the vanilla robotic arms without adding replacement structures. Cargo Large Arms can service or transport a complete live AIMeE, merge matching stacks instead of swapping them, and reach the robot's hidden cargo slots. Every LArRE arm also gains configurable movement speed and unrestricted movement beside obstructions.
+
+    Whole-robot transport keeps the original AIMeE instance intact, including its reference ID, name, battery, IC chip, cargo, configuration, and power state.
 
     [hr]
 
@@ -48,7 +50,7 @@
 
     Open StationeersLaunchPad's pre-launch [b]Mod Configuration[/b] screen and change [b]LArRE Arms / MovementSpeedMultiplier[/b]. The accepted range is 0.1 to 10 and the default is 1. Restart the game or server after changing it.
 
-    On multiplayer worlds the dedicated or listen server's value is authoritative. The server and every connecting client must install the same Larre Plus version because the mod extends LArRE join data to synchronize the setting.
+    On multiplayer worlds the dedicated or listen server's value is authoritative. The server and every connecting client must install the same LArRE+ version because the mod extends LArRE join data to synchronize the setting.
   </Description>
   <ChangeLog>
     [h3]Version 0.3.1[/h3]
@@ -96,16 +98,16 @@
   <Tags>
     <Tag>StationeersLaunchPad</Tag>
   </Tags>
-  <InGameDescription><![CDATA[<size="30"><color=#ffa500>Larre Plus</color></size>
+  <InGameDescription><![CDATA[<size="30"><color=#ffa500>LArRE+</color></size>
 
 This is a Plugin Mod requiring BepInEx and StationeersLaunchPad.
 Source code: https://github.com/jameslkingsley/LArREPlus
 
-Adds whole-AIMeE transport, AIMeE inventory access, and matching-stack merging to Cargo Large Arms. Every LArRE arm also gains unrestricted movement and a configurable 0.1x-to-10x speed multiplier.
+Expands Cargo Large Arms with whole-AIMeE transport, AIMeE inventory access, hidden-slot handling, and matching-stack merging. Every LArRE arm also gains unrestricted movement and a configurable 0.1x-to-10x speed multiplier.
 
 Set a Cargo Large Arm's TargetSlotIndex to 50 to pick up or release the complete live robot. Indices 0 through 49 continue to access AIMeE inventory slots.
 
-Configure speed before launch under Mod Configuration > Larre Plus > LArRE Arms > MovementSpeedMultiplier.
+Configure speed before launch under Mod Configuration > LArRE+ > LArRE Arms > MovementSpeedMultiplier.
 
-On multiplayer worlds the server's setting is authoritative. The server and every client must install the same Larre Plus version.]]></InGameDescription>
+On multiplayer worlds the server's setting is authoritative. The server and every client must install the same LArRE+ version.]]></InGameDescription>
 </ModMetadata>

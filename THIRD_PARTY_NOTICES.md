@@ -1,6 +1,6 @@
 # Third-party notices
 
-Larre Plus is an independently developed mod for Stationeers.
+LArRE+ is an independently developed mod for Stationeers.
 
 Stationeers and its assets are property of their respective owners. This
 repository does not contain Stationeers assemblies, models, textures, or other

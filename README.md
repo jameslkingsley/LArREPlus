@@ -1,7 +1,7 @@
-# Larre Plus
+# LArRE+
 
-Larre Plus is a [StationeersLaunchPad](https://stationeerslaunchpad.github.io/)
-plugin mod that expands the capabilities of the game's LArRE robotic arms.
+LArRE+ is a [StationeersLaunchPad](https://stationeerslaunchpad.github.io/)
+plugin mod that expands the capabilities of Stationeers' LArRE robotic arms.
 
 Cargo Large Arms can access an AIMeE parked beneath their interaction position,
 carry the complete live robot, merge matching stacks instead of swapping them,
@@ -33,7 +33,7 @@ movement speed and unrestricted movement beside obstructions.
 - BepInEx 5.4
 - StationeersLaunchPad
 
-The server and every connecting client must install the same Larre Plus version.
+The server and every connecting client must install the same LArRE+ version.
 The mod extends the arm join-data format to synchronize movement speed, so mixed
 versions are not supported.
 
@@ -43,7 +43,7 @@ versions are not supported.
 2. Extract the release archive into `Documents\My Games\Stationeers\mods`.
 3. Confirm the layout contains `LarrePlus\About\About.xml` and
    `LarrePlus\LarrePlus.dll`.
-4. Enable Larre Plus in LaunchPad and restart Stationeers.
+4. Enable LArRE+ in LaunchPad and restart Stationeers.
 
 Successful startup writes messages beginning with `[LarrePlus]` to `Player.log`.
 
@@ -63,7 +63,7 @@ AIMeE out of reach cancels the transfer.
 ### Transporting the complete robot
 
 Set the Cargo Large Arm's `TargetSlotIndex` to `50`. This upper vanilla index is
-reserved by Larre Plus for whole-AIMeE transport:
+reserved by LArRE+ for whole-AIMeE transport:
 
 - With an empty hand and an AIMeE beneath the arm, activation picks up the live
   robot.
@@ -98,7 +98,7 @@ targeting and transfer execution occur on the simulation authority, while the
 server's configured arm speed is serialized to clients so they observe matching
 animations.
 
-Use the same Larre Plus DLL on the server and every client. Test new releases on
+Use the same LArRE+ DLL on the server and every client. Test new releases on
 a disposable save before using them on an important multiplayer world.
 
 ## Building
@@ -125,4 +125,4 @@ release archive with:
 
 ## License
 
-Larre Plus is available under the [MIT License](LICENSE).
+LArRE+ is available under the [MIT License](LICENSE).
