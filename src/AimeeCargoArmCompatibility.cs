@@ -1,5 +1,6 @@
 using System;
 using System.Reflection;
+using Assets.Scripts;
 using Assets.Scripts.GridSystem;
 using Assets.Scripts.Objects;
 using Assets.Scripts.Objects.Pipes;
@@ -362,11 +363,11 @@ internal static class AimeeCargoArmCompatibility
     }
 }
 
-[HarmonyPatch(typeof(Thing), nameof(Thing.CanEnter))]
+[HarmonyPatch(typeof(DraggableThing), nameof(DraggableThing.CanEnter))]
 internal static class CargoArmAimeeCanEnterPatch
 {
     private static void Postfix(
-        Thing __instance,
+        DraggableThing __instance,
         Slot __0,
         ref CanEnterResult __result)
     {

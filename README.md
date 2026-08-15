@@ -77,8 +77,8 @@ s d0 Activate 1
 
 Indices `0` through `49` retain their existing meaning as AIMeE inventory-slot
 indices. Pickup is revalidated at the transfer point, so an AIMeE that drives
-out of reach before the arm arrives is not collected. Version 0.3.0 deliberately
-does not check whether the release position is obstructed.
+out of reach before the arm arrives is not collected. Whole-AIMeE release
+deliberately does not check whether the release position is obstructed.
 
 ## Movement speed
 
