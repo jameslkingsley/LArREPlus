@@ -11,7 +11,7 @@ public sealed class LarrePlusMod : ModBehaviour
 {
     public const string ModId = "com.james.larreplus";
     public const string DisplayName = "LArRE+";
-    public const string Version = "0.3.1";
+    public const string Version = "0.3.2";
 
     private Harmony _harmony;
     private readonly ConfigEntry<float> _movementSpeed;

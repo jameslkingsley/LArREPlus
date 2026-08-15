@@ -71,7 +71,8 @@ if ($aimeeSource -notmatch 'WholeAimeeSlotIndex\s*=\s*50' -or
     $aimeeSource -notmatch 'OnServer\.MoveToSlot\(targetRobot, handSlot\)' -or
     $aimeeSource -notmatch 'OnServer\.MoveToWorld\(heldRobot, position, rotation\)' -or
     $aimeeSource -notmatch 'IsCargoArmHandSlot' -or
-    $aimeeSource -notmatch 'HarmonyPatch\(typeof\(DraggableThing\), nameof\(DraggableThing\.CanEnter\)\)') {
+    $aimeeSource -notmatch 'HarmonyPatch\(typeof\(DraggableThing\), nameof\(DraggableThing\.CanEnter\)\)' -or
+    $aimeeSource -notmatch 'AimeeWholeRobotSlotBoundsPatch') {
     throw 'Whole-AIMeE transport is missing an expected pickup, release, or scoped slot guard.'
 }
 

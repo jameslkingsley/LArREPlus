@@ -7,6 +7,13 @@ and this project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html)
 
 ## Unreleased
 
+## 0.3.2 - 2026-08-15
+
+### Fixed
+
+- Prevented the Cargo Large Arm tooltip from indexing beyond AIMeE's inventory
+  while `TargetSlotIndex` is set to the whole-robot value of `50`.
+
 ## 0.3.1 - 2026-08-15
 
 ### Fixed

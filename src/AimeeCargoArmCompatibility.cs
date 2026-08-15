@@ -379,6 +379,29 @@ internal static class CargoArmAimeeCanEnterPatch
     }
 }
 
+[HarmonyPatch(typeof(Thing), nameof(Thing.GetSlot), new Type[] { typeof(int) })]
+internal static class AimeeWholeRobotSlotBoundsPatch
+{
+    private static bool Prefix(
+        Thing __instance,
+        int __0,
+        ref Slot __result)
+    {
+        if (__instance is not RobotMining ||
+            __0 != AimeeCargoArmCompatibility.WholeAimeeSlotIndex ||
+            (__instance.Slots != null && __0 < __instance.Slots.Count))
+        {
+            return true;
+        }
+
+        // Index 50 selects the complete robot on a Cargo Large Arm; it is not
+        // an AIMeE inventory slot. Vanilla tooltip code calls GetSlot directly,
+        // so return no slot instead of allowing List<T> to throw.
+        __result = null;
+        return false;
+    }
+}
+
 [HarmonyPatch(typeof(RoboticArmDockCargo), "SetTargetSmallGrid")]
 internal static class CargoArmAimeeTargetPatch
 {

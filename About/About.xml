@@ -3,7 +3,7 @@
   <Name>LArRE+</Name>
   <ModID>com.james.larreplus</ModID>
   <Author>James</Author>
-  <Version>0.3.1</Version>
+  <Version>0.3.2</Version>
   <Description>
     This is a Plugin Mod.
     It requires BepInEx with the StationeersLaunchPad plugin.
@@ -63,6 +63,11 @@
     On multiplayer worlds the dedicated or listen server's value is authoritative. The server and every connecting client must install the same LArRE+ version because the mod extends LArRE join data to synchronize the setting.
   </Description>
   <ChangeLog>
+    [h3]Version 0.3.2[/h3]
+    [list]
+    [*]Fixed an out-of-range exception when viewing a Cargo Large Arm tooltip while TargetSlotIndex is 50
+    [/list]
+
     [h3]Version 0.3.1[/h3]
     [list]
     [*]Fixed whole-AIMeE pickup being rejected by the robot's draggable-object slot eligibility check

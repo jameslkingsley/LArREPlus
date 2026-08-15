@@ -3,7 +3,7 @@
     <TargetFramework>netstandard2.1</TargetFramework>
     <AssemblyName>LarrePlus</AssemblyName>
     <RootNamespace>LarrePlus</RootNamespace>
-    <Version>0.3.1</Version>
+    <Version>0.3.2</Version>
     <Authors>James</Authors>
     <Description>Whole-AIMeE transport, smarter cargo handling, configurable speed, and unrestricted movement for Stationeers LArRE arms.</Description>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
