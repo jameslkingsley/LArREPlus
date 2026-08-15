@@ -3,7 +3,7 @@
   <Name>LArRE+</Name>
   <ModID>com.james.larreplus</ModID>
   <Author>James</Author>
-  <Version>0.3.2</Version>
+  <Version>0.4.0</Version>
   <Description>
     This is a Plugin Mod.
     It requires BepInEx with the StationeersLaunchPad plugin.
@@ -13,7 +13,7 @@
     [h1]LArRE+[/h1]
     [i]More capable LArRE automation.[/i]
 
-    LArRE+ expands the vanilla robotic arms without adding replacement structures. Cargo Large Arms can service or transport a complete live AIMeE, merge matching stacks instead of swapping them, and reach the robot's hidden cargo slots. Every LArRE arm also gains configurable movement speed and unrestricted movement beside obstructions.
+    LArRE+ expands the vanilla robotic arms without adding replacement structures. Cargo Large Arms can service or transport a complete live AIMeE, merge matching stacks instead of swapping them, and reach the robot's hidden cargo slots. Every LArRE arm also gains configurable movement speed and unrestricted movement beside obstructions, while Linear Rail Doors can be placed in every grid orientation.
 
     Whole-robot transport keeps the original AIMeE instance intact, including its reference ID, name, battery, IC chip, cargo, configuration, and power state.
 
@@ -29,6 +29,7 @@
     [*][b]Stack merging:[/b] matching items in the target slot merge into the Cargo Arm's held stack instead of swapping; overflow remains in the target slot
     [*][b]Configurable speed:[/b] multiply rail, bypass, extension, retraction, and Cargo Arm cycle speed from 0.1x to 10x
     [*][b]Unrestricted movement:[/b] rail collision and extension-face obstruction limits are removed from every LArRE arm
+    [*][b]All-orientation rail doors:[/b] place the vanilla Linear Rail Door on wall, floor, and ceiling planes using the normal rotation controls
     [*][b]Multiplayer support:[/b] inventory operations remain server-authoritative and the server's speed setting is synchronized to clients
     [/list]
 
@@ -56,6 +57,12 @@
 
     [hr]
 
+    [h1]Linear Rail Door orientations[/h1]
+
+    Select the vanilla [b]Kit (Linear Rail Door)[/b] and use the normal placement rotation controls to cycle through wall, floor, and ceiling orientations. LArRE+ upgrades the existing door at runtime, so its recipe, prefab identity, and existing constructed instances remain unchanged.
+
+    [hr]
+
     [h1]Movement speed configuration[/h1]
 
     Open StationeersLaunchPad's pre-launch [b]Mod Configuration[/b] screen and change [b]LArRE Arms / MovementSpeedMultiplier[/b]. The accepted range is 0.1 to 10 and the default is 1. Restart the game or server after changing it.
@@ -63,6 +70,11 @@
     On multiplayer worlds the dedicated or listen server's value is authoritative. The server and every connecting client must install the same LArRE+ version because the mod extends LArRE join data to synchronize the setting.
   </Description>
   <ChangeLog>
+    [h3]Version 0.4.0[/h3]
+    [list]
+    [*]Added wall, floor, and ceiling placement orientations for the vanilla Linear Rail Door
+    [/list]
+
     [h3]Version 0.3.2[/h3]
     [list]
     [*]Fixed an out-of-range exception when viewing a Cargo Large Arm tooltip while TargetSlotIndex is 50
@@ -118,7 +130,7 @@
 This is a Plugin Mod requiring BepInEx and StationeersLaunchPad.
 Source code: https://github.com/jameslkingsley/LArREPlus
 
-Expands Cargo Large Arms with whole-AIMeE transport, AIMeE inventory access, hidden-slot handling, and matching-stack merging. Every LArRE arm also gains unrestricted movement and a configurable 0.1x-to-10x speed multiplier.
+Expands Cargo Large Arms with whole-AIMeE transport, AIMeE inventory access, hidden-slot handling, and matching-stack merging. Every LArRE arm also gains unrestricted movement and a configurable 0.1x-to-10x speed multiplier. The vanilla Linear Rail Door can be placed on wall, floor, and ceiling planes.
 
 To carry a whole AIMeE: leave the ordinary target position empty, park the constructed robot beneath the arm, ensure the hand is empty, set TargetSlotIndex to 50, and set Activate to 1. Move the arm along its rail, then set Activate to 1 again to release the robot. Indices 0 through 49 continue to access AIMeE inventory slots.
 

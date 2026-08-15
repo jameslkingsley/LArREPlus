@@ -7,6 +7,13 @@ and this project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html)
 
 ## Unreleased
 
+## 0.4.0 - 2026-08-15
+
+### Added
+
+- Placement of the vanilla Linear Rail Door in every grid orientation, including
+  wall, floor, and ceiling planes.
+
 ## 0.3.2 - 2026-08-15
 
 ### Fixed

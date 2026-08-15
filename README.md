@@ -8,6 +8,9 @@ carry the complete live robot, merge matching stacks instead of swapping them,
 and use AIMeE's hidden cargo slots. Every LArRE arm also gains configurable
 movement speed and unrestricted movement beside obstructions.
 
+The vanilla Linear Rail Door can also be rotated into every grid orientation,
+allowing LArRE rail networks to pass through walls, floors, and ceilings.
+
 ## Features
 
 - Lets Cargo Large Arms insert into, extract from, and swap items with AIMeE.
@@ -23,6 +26,7 @@ movement speed and unrestricted movement beside obstructions.
   remains in the target slot when the held stack reaches its capacity.
 - Removes rail collision and extension-face obstruction limits from all LArRE
   arms.
+- Allows the vanilla Linear Rail Door to be placed in every grid orientation.
 - Applies a configurable `0.1`-to-`10` multiplier to rail travel, bypass
   movement, extension, retraction, and the Cargo Large Arm transfer delay.
 - Synchronizes the server's speed multiplier to connected clients.
@@ -79,6 +83,13 @@ Indices `0` through `49` retain their existing meaning as AIMeE inventory-slot
 indices. Pickup is revalidated at the transfer point, so an AIMeE that drives
 out of reach before the arm arrives is not collected. Whole-AIMeE release
 deliberately does not check whether the release position is obstructed.
+
+## Linear Rail Door orientations
+
+Select the vanilla **Kit (Linear Rail Door)** and use the normal placement
+rotation controls to cycle through wall, floor, and ceiling orientations. LArRE+
+upgrades the existing door prefab at runtime; it does not add a replacement item,
+so existing recipes and constructed doors retain their vanilla identity.
 
 ## Movement speed
 

@@ -16,7 +16,8 @@ $requiredFiles = @(
     'THIRD_PARTY_NOTICES.md',
     'src/LarrePlusMod.cs',
     'src/AimeeCargoArmCompatibility.cs',
-    'src/ArmEnhancements.cs'
+    'src/ArmEnhancements.cs',
+    'src/RoboticArmDoorOrientations.cs'
 )
 
 foreach ($relativePath in $requiredFiles) {
@@ -30,6 +31,7 @@ $about = [xml](Get-Content -LiteralPath (Join-Path $projectRoot 'About/About.xml
 $project = [xml](Get-Content -LiteralPath (Join-Path $projectRoot 'LarrePlus.csproj') -Raw -Encoding UTF8)
 $source = Get-Content -LiteralPath (Join-Path $projectRoot 'src/LarrePlusMod.cs') -Raw -Encoding UTF8
 $aimeeSource = Get-Content -LiteralPath (Join-Path $projectRoot 'src/AimeeCargoArmCompatibility.cs') -Raw -Encoding UTF8
+$doorSource = Get-Content -LiteralPath (Join-Path $projectRoot 'src/RoboticArmDoorOrientations.cs') -Raw -Encoding UTF8
 
 $expectedId = 'com.james.larreplus'
 $expectedName = 'LArRE+'
@@ -74,6 +76,12 @@ if ($aimeeSource -notmatch 'WholeAimeeSlotIndex\s*=\s*50' -or
     $aimeeSource -notmatch 'HarmonyPatch\(typeof\(DraggableThing\), nameof\(DraggableThing\.CanEnter\)\)' -or
     $aimeeSource -notmatch 'AimeeWholeRobotSlotBoundsPatch') {
     throw 'Whole-AIMeE transport is missing an expected pickup, release, or scoped slot guard.'
+}
+if ($doorSource -notmatch 'RotationAxis\.All' -or
+    $doorSource -notmatch 'AllowedRotations\.All' -or
+    $doorSource -notmatch 'ConnectionType\.Exhaustive' -or
+    $doorSource -notmatch 'AllAxisPermutation\s*=\s*\{\s*0,\s*1,\s*2,\s*3,\s*4,\s*5\s*\}') {
+    throw 'Linear Rail Door all-axis rotation setup is incomplete.'
 }
 
 $bundledDependencies = Get-ChildItem -LiteralPath $projectRoot -Recurse -File -Filter '*.dll' |

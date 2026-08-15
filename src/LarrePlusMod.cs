@@ -11,7 +11,7 @@ public sealed class LarrePlusMod : ModBehaviour
 {
     public const string ModId = "com.james.larreplus";
     public const string DisplayName = "LArRE+";
-    public const string Version = "0.3.2";
+    public const string Version = "0.4.0";
 
     private Harmony _harmony;
     private readonly ConfigEntry<float> _movementSpeed;
@@ -45,7 +45,7 @@ public sealed class LarrePlusMod : ModBehaviour
             ArmEnhancements.ValidateGameApi();
             _harmony = new Harmony(ModId);
             _harmony.PatchAll(typeof(LarrePlusMod).Assembly);
-            Log("Enabled Cargo Large Arm access to AIMeE slots and whole-bot transport.");
+            Log("Enabled enhanced LArRE arms and all-axis Linear Rail Door placement.");
         }
         catch (Exception exception)
         {
