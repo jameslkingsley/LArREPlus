@@ -29,6 +29,7 @@ foreach ($relativePath in $requiredFiles) {
 $about = [xml](Get-Content -LiteralPath (Join-Path $projectRoot 'About/About.xml') -Raw -Encoding UTF8)
 $project = [xml](Get-Content -LiteralPath (Join-Path $projectRoot 'LarrePlus.csproj') -Raw -Encoding UTF8)
 $source = Get-Content -LiteralPath (Join-Path $projectRoot 'src/LarrePlusMod.cs') -Raw -Encoding UTF8
+$aimeeSource = Get-Content -LiteralPath (Join-Path $projectRoot 'src/AimeeCargoArmCompatibility.cs') -Raw -Encoding UTF8
 
 $expectedId = 'com.james.larreplus'
 $expectedAssembly = 'LarrePlus'
@@ -58,6 +59,12 @@ if ($source -notmatch [regex]::Escape("public const string Version = `"$version`
 }
 if ($source -notmatch 'Config\.Reload\(\);[\s\S]*ArmEnhancements\.ConfigureSpeed') {
     throw 'LaunchPad configuration is not reloaded before applying movement speed.'
+}
+if ($aimeeSource -notmatch 'WholeAimeeSlotIndex\s*=\s*50' -or
+    $aimeeSource -notmatch 'OnServer\.MoveToSlot\(targetRobot, handSlot\)' -or
+    $aimeeSource -notmatch 'OnServer\.MoveToWorld\(heldRobot, position, rotation\)' -or
+    $aimeeSource -notmatch 'IsCargoArmHandSlot') {
+    throw 'Whole-AIMeE transport is missing an expected pickup, release, or scoped slot guard.'
 }
 
 $bundledDependencies = Get-ChildItem -LiteralPath $projectRoot -Recurse -File -Filter '*.dll' |

@@ -19,6 +19,8 @@ Stationeers and dependency assemblies must not be committed.
 - Run `powershell -NoProfile -ExecutionPolicy Bypass -File scripts/ValidateRepository.ps1`.
 - Test Cargo Large Arm insertion, extraction, swapping, and stack merging.
 - Test valid and out-of-range AIMeE slot indices, including hidden cargo slots.
+- Test whole-AIMeE pickup, rail transport, release, moving-target cancellation,
+  save/reload while carried, and preservation of all nested inventory.
 - Test rail, bypass, extension, retraction, and cargo-cycle speed changes.
 - Test arm movement beside walls with collision and face obstruction removed.
 - Test save/reload, a listen server, and a dedicated server with a connected

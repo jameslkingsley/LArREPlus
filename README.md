@@ -4,9 +4,9 @@ Larre Plus is a [StationeersLaunchPad](https://stationeerslaunchpad.github.io/)
 plugin mod that expands the capabilities of the game's LArRE robotic arms.
 
 Cargo Large Arms can access an AIMeE parked beneath their interaction position,
-merge matching stacks instead of swapping them, and use AIMeE's hidden cargo
-slots. Every LArRE arm also gains configurable movement speed and unrestricted
-movement beside obstructions.
+carry the complete live robot, merge matching stacks instead of swapping them,
+and use AIMeE's hidden cargo slots. Every LArRE arm also gains configurable
+movement speed and unrestricted movement beside obstructions.
 
 ## Features
 
@@ -15,6 +15,10 @@ movement beside obstructions.
 - Preserves vanilla stationary-device priority over nearby AIMeE robots.
 - Safely denies indices outside AIMeE's available slot range.
 - Allows access to AIMeE's hidden cargo slots.
+- Picks up, transports, and releases a complete constructed AIMeE without
+  replacing or deconstructing it.
+- Preserves the carried robot's battery, IC chip, cargo, reference ID, name,
+  configuration, and power state.
 - Merges matching target stacks into the item held by a Cargo Large Arm; overflow
   remains in the target slot when the held stack reaches its capacity.
 - Removes rail collision and extension-face obstruction limits from all LArRE
@@ -55,6 +59,26 @@ logic, then activate normally:
 
 The target is checked again when the arm reaches the transfer point. Moving
 AIMeE out of reach cancels the transfer.
+
+### Transporting the complete robot
+
+Set the Cargo Large Arm's `TargetSlotIndex` to `50`. This upper vanilla index is
+reserved by Larre Plus for whole-AIMeE transport:
+
+- With an empty hand and an AIMeE beneath the arm, activation picks up the live
+  robot.
+- Move the arm along its rail while AIMeE remains in the hand slot.
+- Activate again at another position to release AIMeE beneath the arm.
+
+```ic10
+s d0 TargetSlotIndex 50
+s d0 Activate 1
+```
+
+Indices `0` through `49` retain their existing meaning as AIMeE inventory-slot
+indices. Pickup is revalidated at the transfer point, so an AIMeE that drives
+out of reach before the arm arrives is not collected. Version 0.3.0 deliberately
+does not check whether the release position is obstructed.
 
 ## Movement speed
 

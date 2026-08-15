@@ -7,6 +7,15 @@ and this project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html)
 
 ## Unreleased
 
+## 0.3.0 - 2026-08-15
+
+### Added
+
+- Whole-AIMeE pickup and release with a Cargo Large Arm using
+  `TargetSlotIndex = 50`.
+- Native server-authoritative transport of the live robot, preserving its
+  battery, IC chip, cargo, identity, configuration, and power state.
+
 ## 0.2.2 - 2026-08-14
 
 ### Fixed

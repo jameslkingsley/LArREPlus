@@ -17,6 +17,10 @@ internal static class AimeeCargoArmCompatibility
     private const float LateralTolerance = 0.8f;
     private const float AxialTolerance = 1.0f;
 
+    // Vanilla clamps TargetSlotIndex to 0-50. AIMeE has far fewer inventory
+    // slots, so the otherwise-unused upper value selects the complete robot.
+    internal const int WholeAimeeSlotIndex = 50;
+
     private static readonly FieldInfo ArmField =
         AccessTools.Field(typeof(RoboticArmDock), "_arm");
 
@@ -84,11 +88,42 @@ internal static class AimeeCargoArmCompatibility
 
     internal static bool TryHandleAimeeTransfer(RoboticArmDockCargo cargoArm)
     {
+        int slotIndex = (int)CurrentSlotIndexField.GetValue(cargoArm);
+        Slot handSlot = (Slot)GetHandSlotMethod.Invoke(cargoArm, null);
+
+        if (slotIndex == WholeAimeeSlotIndex)
+        {
+            RobotMining heldRobot = handSlot?.Get() as RobotMining;
+            RobotMining targetRobot = TargetLogicableField.GetValue(cargoArm) as RobotMining;
+            if (heldRobot != null || targetRobot != null)
+            {
+                return HandleWholeAimeeTransfer(cargoArm, handSlot, heldRobot, targetRobot);
+            }
+
+            return false;
+        }
+
         if (TargetLogicableField.GetValue(cargoArm) is not RobotMining robot)
         {
             return false;
         }
 
+        return HandleAimeeSlotTransfer(cargoArm, handSlot, robot, slotIndex);
+    }
+
+    internal static bool IsCargoArmHandSlot(Slot slot)
+    {
+        return slot?.Parent is RoboticArmDockCargo cargoArm &&
+               cargoArm.Slots != null && cargoArm.Slots.Count > 0 &&
+               ReferenceEquals(cargoArm.Slots[0], slot);
+    }
+
+    private static bool HandleAimeeSlotTransfer(
+        RoboticArmDockCargo cargoArm,
+        Slot handSlot,
+        RobotMining robot,
+        int slotIndex)
+    {
         try
         {
             if (!IsAimeeInReach(cargoArm, robot))
@@ -97,7 +132,6 @@ internal static class AimeeCargoArmCompatibility
                 return true;
             }
 
-            int slotIndex = (int)CurrentSlotIndexField.GetValue(cargoArm);
             if (slotIndex < 0 || robot.Slots == null || slotIndex >= robot.Slots.Count)
             {
                 return true;
@@ -109,7 +143,6 @@ internal static class AimeeCargoArmCompatibility
                 return true;
             }
 
-            Slot handSlot = (Slot)GetHandSlotMethod.Invoke(cargoArm, null);
             if (handSlot == null)
             {
                 return true;
@@ -129,6 +162,58 @@ internal static class AimeeCargoArmCompatibility
         catch (Exception exception)
         {
             LarrePlusMod.LogError("AIMeE cargo transfer failed", Unwrap(exception));
+            return true;
+        }
+        finally
+        {
+            FinishActivation(cargoArm);
+        }
+    }
+
+    private static bool HandleWholeAimeeTransfer(
+        RoboticArmDockCargo cargoArm,
+        Slot handSlot,
+        RobotMining heldRobot,
+        RobotMining targetRobot)
+    {
+        try
+        {
+            if (handSlot == null)
+            {
+                return true;
+            }
+
+            if (heldRobot != null)
+            {
+                if (!TryGetReleaseTransform(cargoArm, out Vector3 position, out Quaternion rotation))
+                {
+                    return true;
+                }
+
+                // Move the same live AIMeE back into the world. RobotMining's
+                // native override restores its wheels and DynamicThing restores
+                // physics without replacing the robot or its nested inventory.
+                OnServer.MoveToWorld(heldRobot, position, rotation);
+                SetTargetLogicableMethod.Invoke(cargoArm, new object[] { null });
+                return true;
+            }
+
+            if (targetRobot == null || !IsAimeeInReach(cargoArm, targetRobot) ||
+                !handSlot.IsEmpty())
+            {
+                return true;
+            }
+
+            // Native slot movement keeps the complete live object hierarchy and
+            // uses Stationeers' normal server-authoritative replication. The
+            // scoped CanEnter patch permits only this Cargo Arm hand transition.
+            OnServer.MoveToSlot(targetRobot, handSlot);
+            SetTargetLogicableMethod.Invoke(cargoArm, new object[] { null });
+            return true;
+        }
+        catch (Exception exception)
+        {
+            LarrePlusMod.LogError("Whole-AIMeE transfer failed", Unwrap(exception));
             return true;
         }
         finally
@@ -173,7 +258,8 @@ internal static class AimeeCargoArmCompatibility
 
         foreach (RobotMining robot in RobotMining.AllRobots)
         {
-            if (robot == null || !robot.gameObject.activeInHierarchy ||
+            if (robot == null || robot.ParentSlot != null ||
+                !robot.gameObject.activeInHierarchy ||
                 !TryGetReachScore(cargoArm, robot, out float score) || score >= nearestScore)
             {
                 continue;
@@ -188,8 +274,39 @@ internal static class AimeeCargoArmCompatibility
 
     private static bool IsAimeeInReach(RoboticArmDockCargo cargoArm, RobotMining robot)
     {
-        return robot != null && robot.gameObject.activeInHierarchy &&
+        return robot != null && robot.ParentSlot == null &&
+               robot.gameObject.activeInHierarchy &&
                TryGetReachScore(cargoArm, robot, out _);
+    }
+
+    private static bool TryGetReleaseTransform(
+        RoboticArmDockCargo cargoArm,
+        out Vector3 position,
+        out Quaternion rotation)
+    {
+        position = default;
+        rotation = default;
+
+        if (ArmField.GetValue(cargoArm) is not RoboticArm arm)
+        {
+            return false;
+        }
+
+        Vector3 up = arm.transform.up.normalized;
+        Vector3 forward = Vector3.ProjectOnPlane(cargoArm.transform.forward, up);
+        if (forward.sqrMagnitude < 0.0001f)
+        {
+            forward = Vector3.ProjectOnPlane(cargoArm.transform.right, up);
+        }
+
+        if (forward.sqrMagnitude < 0.0001f)
+        {
+            return false;
+        }
+
+        position = arm.transform.position - up * InteractionDistance;
+        rotation = Quaternion.LookRotation(forward.normalized, up);
+        return true;
     }
 
     private static bool TryGetReachScore(
@@ -242,6 +359,22 @@ internal static class AimeeCargoArmCompatibility
         return exception is TargetInvocationException { InnerException: not null } invocation
             ? invocation.InnerException
             : exception;
+    }
+}
+
+[HarmonyPatch(typeof(Thing), nameof(Thing.CanEnter))]
+internal static class CargoArmAimeeCanEnterPatch
+{
+    private static void Postfix(
+        Thing __instance,
+        Slot __0,
+        ref CanEnterResult __result)
+    {
+        if (__instance is RobotMining &&
+            AimeeCargoArmCompatibility.IsCargoArmHandSlot(__0))
+        {
+            __result = CanEnterResult.Succeed;
+        }
     }
 }
 

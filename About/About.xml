@@ -3,7 +3,7 @@
   <Name>Larre Plus</Name>
   <ModID>com.james.larreplus</ModID>
   <Author>James</Author>
-  <Version>0.2.2</Version>
+  <Version>0.3.0</Version>
   <Description>
     This is a Plugin Mod.
     It requires BepInEx with the StationeersLaunchPad plugin.
@@ -13,13 +13,14 @@
     [h1]Larre Plus[/h1]
     [i]More capable LArRE automation.[/i]
 
-    Larre Plus expands the game's robotic arms with AIMeE inventory access, Cargo Large Arm stack merging, configurable movement speed, and unrestricted movement beside obstructions.
+    Larre Plus expands the game's robotic arms with whole-AIMeE transport, AIMeE inventory access, Cargo Large Arm stack merging, configurable movement speed, and unrestricted movement beside obstructions.
 
     [hr]
 
     [h1]Features[/h1]
 
     [list]
+    [*][b]Whole-AIMeE transport:[/b] pick up, move, and release a complete constructed robot while preserving its battery, IC chip, cargo, identity, configuration, and power state
     [*][b]AIMeE access:[/b] Cargo Large Arms can insert into, extract from, and swap items with an AIMeE parked beneath the arm
     [*][b]Hidden cargo slots:[/b] automation can use AIMeE slots that are hidden from the normal contents panel
     [*][b]Safe slot selection:[/b] unsupported and out-of-range AIMeE indices are denied without exceptions
@@ -37,6 +38,10 @@
 
     An empty arm extracts from the selected slot. An occupied arm inserts, swaps, or merges matching stacks. Ordinary stationary targets retain priority, and the transfer is cancelled if AIMeE moves out of reach while the arm is operating.
 
+    Set [b]TargetSlotIndex to 50[/b] to transport the complete live robot instead. Activate with an empty hand to collect AIMeE, move the arm along its rail, then activate again to release it beneath the arm. Indices 0 through 49 continue to address AIMeE's inventory slots.
+
+    Version 0.3.0 does not check the release position for obstructions.
+
     [hr]
 
     [h1]Movement speed configuration[/h1]
@@ -46,6 +51,12 @@
     On multiplayer worlds the dedicated or listen server's value is authoritative. The server and every connecting client must install the same Larre Plus version because the mod extends LArRE join data to synchronize the setting.
   </Description>
   <ChangeLog>
+    [h3]Version 0.3.0[/h3]
+    [list]
+    [*]Added whole-AIMeE pickup and release using TargetSlotIndex 50
+    [*]Preserves the transported robot's live identity, power state, chip, battery, cargo, and configuration
+    [/list]
+
     [h3]Version 0.2.2[/h3]
     [list]
     [*]Fixed LaunchPad-configured movement speed values reverting to the default at runtime
@@ -85,7 +96,9 @@
 This is a Plugin Mod requiring BepInEx and StationeersLaunchPad.
 Source code: https://github.com/jameslkingsley/LArREPlus
 
-Adds AIMeE inventory access and matching-stack merging to Cargo Large Arms. Every LArRE arm also gains unrestricted movement and a configurable 0.1x-to-10x speed multiplier.
+Adds whole-AIMeE transport, AIMeE inventory access, and matching-stack merging to Cargo Large Arms. Every LArRE arm also gains unrestricted movement and a configurable 0.1x-to-10x speed multiplier.
+
+Set a Cargo Large Arm's TargetSlotIndex to 50 to pick up or release the complete live robot. Indices 0 through 49 continue to access AIMeE inventory slots.
 
 Configure speed before launch under Mod Configuration > Larre Plus > LArRE Arms > MovementSpeedMultiplier.
 
