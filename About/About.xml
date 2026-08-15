@@ -40,7 +40,17 @@
 
     An empty arm extracts from the selected slot. An occupied arm inserts, swaps, or merges matching stacks. Ordinary stationary targets retain priority, and the transfer is cancelled if AIMeE moves out of reach while the arm is operating.
 
-    Set [b]TargetSlotIndex to 50[/b] to transport the complete live robot instead. Activate with an empty hand to collect AIMeE, move the arm along its rail, then activate again to release it beneath the arm. Indices 0 through 49 continue to address AIMeE's inventory slots.
+    [h2]Picking up and moving a whole AIMeE[/h2]
+
+    [list]
+    [*][b]1.[/b] Leave the arm's ordinary target position empty and park a constructed AIMeE directly beneath the arm's interaction point. A stationary device in that position takes priority over AIMeE.
+    [*][b]2.[/b] Ensure the Cargo Large Arm's hand is empty.
+    [*][b]3.[/b] Set [b]TargetSlotIndex to 50[/b] using the arm's control or logic, then set [b]Activate to 1[/b]. Keep AIMeE beneath the arm until the transfer occurs.
+    [*][b]4.[/b] Move the arm along its rail while AIMeE is held.
+    [*][b]5.[/b] Set [b]Activate to 1[/b] again to release the complete robot beneath the arm at its new position.
+    [/list]
+
+    Indices 0 through 49 continue to address AIMeE's inventory slots. The transported robot retains its identity, name, battery, IC chip, cargo, configuration, and power state.
 
     Whole-AIMeE release does not check the release position for obstructions.
 
@@ -105,7 +115,7 @@ Source code: https://github.com/jameslkingsley/LArREPlus
 
 Expands Cargo Large Arms with whole-AIMeE transport, AIMeE inventory access, hidden-slot handling, and matching-stack merging. Every LArRE arm also gains unrestricted movement and a configurable 0.1x-to-10x speed multiplier.
 
-Set a Cargo Large Arm's TargetSlotIndex to 50 to pick up or release the complete live robot. Indices 0 through 49 continue to access AIMeE inventory slots.
+To carry a whole AIMeE: leave the ordinary target position empty, park the constructed robot beneath the arm, ensure the hand is empty, set TargetSlotIndex to 50, and set Activate to 1. Move the arm along its rail, then set Activate to 1 again to release the robot. Indices 0 through 49 continue to access AIMeE inventory slots.
 
 Configure speed before launch under Mod Configuration > LArRE+ > LArRE Arms > MovementSpeedMultiplier.
 
